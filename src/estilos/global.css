@@ -1,0 +1,35 @@
+/* Estilos globais: reset mínimo e variáveis de tema. A fase A2 expande este arquivo. */
+:root {
+  --cor-fundo: #f8fafc;
+  --cor-superficie: #ffffff;
+  --cor-borda: #e2e8f0;
+  --cor-texto: #0f172a;
+  --cor-texto-suave: #64748b;
+  --cor-primaria: #2563eb;
+  --cor-primaria-suave: #dbeafe;
+  --cor-destaque: #f59e0b;
+  --raio: 6px;
+  --fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fonte-mono: 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--fonte);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  font-size: 14px;
+  overflow: hidden;
+}
