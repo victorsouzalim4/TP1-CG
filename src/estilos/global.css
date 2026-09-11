@@ -1,16 +1,58 @@
-/* Estilos globais: reset mínimo e variáveis de tema. A fase A2 expande este arquivo. */
+/*
+ * Estilos globais: reset mínimo, variáveis de tema e elementos básicos.
+ * Cada família de componentes tem seu próprio arquivo CSS (grade.css, controles.css,
+ * depurador.css, layout.css) que usa as variáveis declaradas aqui.
+ *
+ * Alvo de layout: 1366×768 sem barras de rolagem no centro.
+ */
 :root {
+  /* Superfícies e bordas */
   --cor-fundo: #f8fafc;
   --cor-superficie: #ffffff;
+  --cor-superficie-suave: #f1f5f9;
   --cor-borda: #e2e8f0;
+  --cor-borda-forte: #cbd5e1;
+
+  /* Texto */
   --cor-texto: #0f172a;
   --cor-texto-suave: #64748b;
+  --cor-texto-invertido: #ffffff;
+
+  /* Cores semânticas */
   --cor-primaria: #2563eb;
+  --cor-primaria-escura: #1d4ed8;
   --cor-primaria-suave: #dbeafe;
   --cor-destaque: #f59e0b;
+  --cor-destaque-suave: #fef3c7;
+  --cor-perigo: #dc2626;
+  --cor-perigo-suave: #fee2e2;
+  --cor-sucesso: #16a34a;
+
+  /* Depurador */
+  --cor-linha-atual: #fef9c3; /* fundo amarelo suave da linha de código em execução */
+  --cor-linha-atual-borda: #facc15;
+  --cor-variavel-alterada: #dbeafe; /* fundo azul-claro das variáveis alteradas */
+
+  /* Métricas */
   --raio: 6px;
+  --raio-pequeno: 4px;
+  --sombra: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --altura-cabecalho: 44px;
+  --largura-lateral: 280px;
+  --largura-direita: 340px;
+  --altura-toolbar: 40px;
+  --altura-status: 24px;
+  --altura-transporte: 56px;
+
+  /* Tipografia */
   --fonte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --fonte-mono: 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --tamanho-fonte: 13px;
+  --tamanho-fonte-pequeno: 12px;
+  --tamanho-fonte-mono: 12px;
+
+  /* Transições */
+  --transicao: 120ms ease;
 }
 
 *,
@@ -30,6 +72,108 @@ body {
   font-family: var(--fonte);
   color: var(--cor-texto);
   background: var(--cor-fundo);
-  font-size: 14px;
+  font-size: var(--tamanho-fonte);
+  line-height: 1.4;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Elementos básicos ---------------------------------------------------- */
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 15px;
+}
+
+h3 {
+  font-size: 13px;
+}
+
+p {
+  margin: 0 0 8px;
+}
+
+code,
+pre {
+  font-family: var(--fonte-mono);
+  font-size: var(--tamanho-fonte-mono);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Barras de rolagem discretas (WebKit/Chromium/Electron) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cor-borda-forte);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Utilitários ----------------------------------------------------------- */
+
+/* Título de seção dentro dos painéis laterais. */
+.secao__titulo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+  margin: 0 0 6px;
+}
+
+/* Bloco vertical com espaçamento entre controles. */
+.pilha {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Linha horizontal de controles. */
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.texto-suave {
+  color: var(--cor-texto-suave);
+}
+
+.texto-pequeno {
+  font-size: var(--tamanho-fonte-pequeno);
+}
+
+/* Mensagem centralizada de estado vazio ("Sem variáveis", etc.). */
+.vazio {
+  color: var(--cor-texto-suave);
+  font-size: var(--tamanho-fonte-pequeno);
+  padding: 16px 12px;
+  text-align: center;
 }

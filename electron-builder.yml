@@ -1,0 +1,34 @@
+# Configuração do electron-builder: gera o executável e o instalador Windows (NSIS).
+# O instalador é "assistido" (não é one-click): permite escolher a pasta de instalação,
+# instalar só para o usuário atual ou para todos, e cria atalhos. O runtime do Electron
+# (Chromium + Node) vai embutido, cobrindo a exigência de "disponibilização de bibliotecas
+# e componentes" do TP.
+appId: br.pucminas.cg.tp1
+productName: Simulador CG - TP1
+copyright: Copyright © 2026 Victor
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**
+  - dist-electron/**
+  - package.json
+asar: true
+win:
+  target:
+    - nsis
+  icon: build/icon.ico
+  artifactName: "${productName}-${version}-${arch}.${ext}"
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false
+  allowElevation: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Simulador CG
+  installerLanguages:
+    - pt_BR
+  language: "1046"
+  artifactName: "${productName}-Instalador-${version}.${ext}"
+  uninstallDisplayName: Simulador CG - TP1
