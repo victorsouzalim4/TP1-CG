@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { criarSessao, montarQuadro } from '../../src/depurador/sessao';
 import { algoritmoDDA } from '../../src/core/rasterizacao/dda';
 import { algoritmoBresenhamReta } from '../../src/core/rasterizacao/bresenhamReta';
-import { algoritmoCohenSutherland } from '../../src/core/recorte/cohenSutherland';
+import type { Algoritmo, Passo } from '../../src/core/tipos';
 
 const COR = '#dc2626';
 
@@ -92,13 +92,17 @@ describe('sessão de depuração', () => {
     expect((s.resultado as { pixels: unknown[] }).pixels).toHaveLength(4);
   });
 
-  it('propaga erros do algoritmo (stub não implementado)', () => {
-    expect(() =>
-      criarSessao(
-        algoritmoCohenSutherland,
-        { x1: 0, y1: 0, x2: 1, y2: 1, janela: { xmin: 0, ymin: 0, xmax: 5, ymax: 5 } },
-        { corPadrao: COR },
-      ),
-    ).toThrow('não implementado');
+  it('propaga erros lançados pelo algoritmo', () => {
+    // Algoritmo de teste que falha no meio da execução, depois de um passo válido.
+    const algoritmoComErro: Algoritmo<null, void> = {
+      id: 'com-erro',
+      nome: 'Com erro',
+      codigo: 'linha 1',
+      *executar(): Generator<Passo, void, void> {
+        yield { linha: 1, variaveis: {} };
+        throw new Error('falha proposital');
+      },
+    };
+    expect(() => criarSessao(algoritmoComErro, null, { corPadrao: COR })).toThrow('falha proposital');
   });
 });
