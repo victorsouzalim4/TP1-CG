@@ -158,7 +158,10 @@ export function PixelGrid({
 
   useEffect(
     () => () => {
+      // Zera o ref: no StrictMode o efeito é desmontado e remontado, e um id cancelado deixado
+      // aqui faria `agendarRedesenho` achar que já há um quadro pendente e nunca mais desenhar.
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
     },
     [],
   );
