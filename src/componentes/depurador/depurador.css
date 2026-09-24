@@ -32,7 +32,8 @@
   display: flex;
   padding: 0 10px 0 0;
   border-left: 3px solid transparent;
-  white-space: pre;
+  /* Linhas longas quebram (o painel tem 340 px): a listagem inteira fica visível sem rolar para o lado. */
+  white-space: pre-wrap;
   transition: background var(--transicao);
 }
 
@@ -47,6 +48,8 @@
 
 .aba-codigo__texto {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* Linha em execução: fundo amarelo suave com borda à esquerda. */
@@ -228,15 +231,15 @@
   table-layout: fixed;
 }
 
-.aba-variaveis th,
-.aba-variaveis td {
+.aba-variaveis > tbody > tr > th,
+.aba-variaveis > tbody > tr > td {
   padding: 4px 10px;
   border-bottom: 1px solid var(--cor-borda);
   vertical-align: top;
   text-align: left;
 }
 
-.aba-variaveis th {
+.aba-variaveis > tbody > tr > th {
   width: 38%;
   font-family: var(--fonte-mono);
   font-size: var(--tamanho-fonte-mono);
@@ -245,8 +248,15 @@
   word-break: break-word;
 }
 
-.aba-variaveis td {
+.aba-variaveis > tbody > tr > td {
   overflow-x: auto;
+}
+
+/* Tabelas (ex.: Liang-Barsky) ocupam a largura toda, numa linha abaixo do nome. */
+.aba-variaveis > tbody > tr.aba-variaveis__linha--larga > th {
+  width: auto;
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .aba-variaveis__linha {

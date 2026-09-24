@@ -51,10 +51,15 @@ export function useObjetosSelecionados(): ObjetoGrafico[] {
   return useMemo(() => objetos.filter((o) => o.selecionado), [objetos]);
 }
 
-/** Pixels dos objetos selecionados (para o realce de seleção sobre a grade). */
+/**
+ * Pixels dos objetos selecionados (para o realce de seleção sobre a grade). Os ocultos pela
+ * depuração ficam de fora: o realce não deve denunciar a forma original de um objeto que está
+ * sendo redesenhado passo a passo.
+ */
 export function usePixelsSelecionados(): Pixel[] {
   const selecionados = useObjetosSelecionados();
-  return useMemo(() => pixelsDaCena(selecionados), [selecionados]);
+  const ocultos = useStore((s) => s.depuracao.objetosOcultos);
+  return useMemo(() => pixelsDaCena(selecionados, ocultos), [selecionados, ocultos]);
 }
 
 /** Quadro do passo atual da depuração, ou null sem sessão. */
