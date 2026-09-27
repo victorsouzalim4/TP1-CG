@@ -1,0 +1,72 @@
+# Taskfile do Simulador CG - TP1 (https://taskfile.dev)
+# Uso: `task --list` mostra as tarefas; `task <nome>` executa uma delas.
+# As tarefas delegam aos scripts do package.json, que continua sendo a fonte da verdade.
+version: '3'
+
+tasks:
+  default:
+    desc: Lista as tarefas disponíveis
+    silent: true
+    cmds:
+      - task --list
+
+  install:
+    desc: Instala as dependências (npm install)
+    cmds:
+      - npm install
+
+  dev:
+    desc: Sobe o servidor de desenvolvimento do Vite (navegador)
+    cmds:
+      - npm run dev
+
+  preview:
+    desc: Serve localmente o build de produção gerado em dist/
+    cmds:
+      - npm run preview
+
+  typecheck:
+    desc: Checa os tipos do app (Vite) e do processo principal do Electron
+    cmds:
+      - npm run typecheck
+
+  test:
+    desc: Roda a suíte de testes uma vez (vitest run)
+    cmds:
+      - npm test
+
+  test:watch:
+    desc: Roda os testes em modo watch
+    cmds:
+      - npm run test:watch
+
+  check:
+    desc: Typecheck + testes (use antes de commitar)
+    cmds:
+      - task: typecheck
+      - task: test
+
+  build:
+    desc: Typecheck do app e build de produção do Vite em dist/
+    cmds:
+      - npm run build
+
+  build:electron-main:
+    desc: Compila o processo principal do Electron em dist-electron/
+    cmds:
+      - npm run build:electron-main
+
+  electron:dev:
+    desc: Abre o app no Electron apontando para o servidor do Vite (hot reload)
+    cmds:
+      - npm run electron:dev
+
+  electron:build:
+    desc: Gera o executável e o instalador Windows (NSIS) em release/
+    cmds:
+      - npm run electron:build
+
+  clean:
+    desc: Remove os artefatos de build (dist/, dist-electron/, release/)
+    cmds:
+      - rm -rf dist dist-electron release
