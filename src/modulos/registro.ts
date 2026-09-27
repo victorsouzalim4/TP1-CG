@@ -11,7 +11,6 @@ import { ModuloLiangBarsky } from './recorte/ModuloLiangBarsky';
 import { ModuloTransformacoes } from './transformacoes/ModuloTransformacoes';
 import { ModuloBoundaryFill } from './preenchimento/ModuloBoundaryFill';
 import { ModuloFloodFill } from './preenchimento/ModuloFloodFill';
-import { ModuloLivre } from './livre/ModuloLivre';
 
 export type ModuloId =
   | 'dda'
@@ -21,10 +20,9 @@ export type ModuloId =
   | 'liang-barsky'
   | 'transformacoes'
   | 'boundary-fill'
-  | 'flood-fill'
-  | 'livre';
+  | 'flood-fill';
 
-export type GrupoModulo = 'Rasterização' | 'Recorte' | 'Transformações' | 'Preenchimento' | 'Livre';
+export type GrupoModulo = 'Rasterização' | 'Recorte' | 'Transformações' | 'Preenchimento';
 
 export interface DefinicaoModulo {
   id: ModuloId;
@@ -43,7 +41,6 @@ export const MODULOS: readonly DefinicaoModulo[] = [
   { id: 'transformacoes', titulo: 'Transformações 2D', grupo: 'Transformações', componente: ModuloTransformacoes },
   { id: 'boundary-fill', titulo: 'Boundary Fill', grupo: 'Preenchimento', componente: ModuloBoundaryFill },
   { id: 'flood-fill', titulo: 'Flood Fill', grupo: 'Preenchimento', componente: ModuloFloodFill },
-  { id: 'livre', titulo: 'Modo Livre', grupo: 'Livre', componente: ModuloLivre },
 ];
 
 export const MODULO_PADRAO: ModuloId = 'dda';

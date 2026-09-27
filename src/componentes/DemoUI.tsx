@@ -44,7 +44,6 @@ const MODULOS_DEMO: readonly DefinicaoModulo[] = [
   { id: 'transformacoes', titulo: 'Transformações 2D', grupo: 'Transformações', componente: ComponenteVazio },
   { id: 'boundary-fill', titulo: 'Boundary Fill', grupo: 'Preenchimento', componente: ComponenteVazio },
   { id: 'flood-fill', titulo: 'Flood Fill', grupo: 'Preenchimento', componente: ComponenteVazio },
-  { id: 'livre', titulo: 'Modo Livre', grupo: 'Livre', componente: ComponenteVazio },
 ];
 
 const TAMANHOS = [
